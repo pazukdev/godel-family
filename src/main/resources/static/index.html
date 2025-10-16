@@ -11,12 +11,41 @@
     <div class="container mt-5">
         <!-- Header -->
         <header class="text-center mb-5">
-            <h1 class="display-4">Employee Management System</h1>
+            <h1 class="display-4">Godel Family!❤️🦄</h1>
             <p class="lead text-muted">Manage your team effectively</p>
         </header>
 
         <!-- Success/Error Messages -->
         <div id="messageContainer"></div>
+
+        <!-- AI Query Section -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <h5 class="card-title mb-3">
+                    <i class="bi bi-robot"></i> Ask AI About Employees
+                </h5>
+                <p class="text-muted small">Ask natural language questions about your employees (e.g., "How many developers do we have?", "Who are the senior employees?", "List all employees in the Java division")</p>
+                <div class="input-group mb-3">
+                    <input type="text"
+                           class="form-control"
+                           id="aiQueryInput"
+                           placeholder="Ask a question about employees..."
+                           onkeypress="if(event.key === 'Enter') askAI()">
+                    <button class="btn btn-primary" type="button" onclick="askAI()" id="askButton">
+                        <span id="askButtonText">Ask AI</span>
+                        <span id="askButtonSpinner" class="spinner-border spinner-border-sm d-none" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </span>
+                    </button>
+                </div>
+                <div id="aiResponseContainer" class="d-none">
+                    <div class="alert alert-info">
+                        <h6 class="alert-heading">AI Response:</h6>
+                        <div id="aiResponse"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Add Employee Button -->
         <div class="mb-3">
@@ -117,4 +146,3 @@
     <script src="js/app.js"></script>
 </body>
 </html>
-

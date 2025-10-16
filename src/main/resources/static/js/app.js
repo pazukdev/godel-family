@@ -1,5 +1,6 @@
 // API Base URL
 const API_URL = 'http://localhost:8080/api/employees';
+const AI_URL = 'http://localhost:8080/api/ai/query';
 
 // Bootstrap Modal instance
 let employeeModal;
@@ -176,6 +177,55 @@ async function deleteEmployee(id) {
     }
 }
 
+// AI Query function
+async function askAI() {
+    const input = document.getElementById('aiQueryInput');
+    const question = input.value.trim();
+
+    if (!question) {
+        handleError('Please enter a question');
+        return;
+    }
+
+    // Show loading state
+    const button = document.getElementById('askButton');
+    const buttonText = document.getElementById('askButtonText');
+    const buttonSpinner = document.getElementById('askButtonSpinner');
+
+    buttonText.classList.add('d-none');
+    buttonSpinner.classList.remove('d-none');
+    button.disabled = true;
+
+    try {
+        const response = await fetch(AI_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ question: question })
+        });
+
+        if (!response.ok) throw new Error('Failed to get AI response');
+
+        const data = await response.json();
+
+        // Display response
+        const responseContainer = document.getElementById('aiResponseContainer');
+        const responseDiv = document.getElementById('aiResponse');
+
+        responseDiv.innerHTML = data.answer.replace(/\n/g, '<br>');
+        responseContainer.classList.remove('d-none');
+
+    } catch (error) {
+        handleError('Error getting AI response: ' + error.message);
+    } finally {
+        // Reset button state
+        buttonText.classList.remove('d-none');
+        buttonSpinner.classList.add('d-none');
+        button.disabled = false;
+    }
+}
+
 // Show success message
 function showSuccess(message) {
     showMessage(message, 'success');
@@ -204,4 +254,3 @@ function showMessage(message, type) {
         alert.remove();
     }, 5000);
 }
-
