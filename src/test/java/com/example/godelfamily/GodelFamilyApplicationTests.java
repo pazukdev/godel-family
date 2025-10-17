@@ -8,6 +8,13 @@ class GodelFamilyApplicationTests {
 
     @Test
     void contextLoads() {
+        // This test ensures that the Spring application context loads successfully
     }
 
+    @Test
+    void main() {
+        // Test the main method
+        GodelFamilyApplication.main(new String[] {});
+    }
 }
+

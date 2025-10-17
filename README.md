@@ -77,13 +77,13 @@ Ask questions about your employees in plain English and get intelligent answers!
 2. **Repository Layer**
    - ✅ In-memory storage using `ConcurrentHashMap` (thread-safe)
    - ✅ 10 pre-populated sample employees:
-     1. Emil - Developer, SENIOR, Java
-     2. Pavel - Developer, LEAD, Java
+     1. Emil - Developer, LEAD, Java
+     2. Pavel - Developer, SENIOR, Java
      3. Sergey - QA, MIDDLE, QA
      4. Anna - Developer, JUNIOR, Python
      5. Maria - BA, MIDDLE, BA
      6. Dmitry - Developer, SENIOR, JS
-     7. Olga - QA, LEAD, QA
+     7. Olga - QA, SENIOR, QA
      8. Igor - Developer, MIDDLE, Java
      9. Svetlana - BA, SENIOR, BA
      10. Alexey - Developer, JUNIOR, Python
@@ -371,8 +371,3 @@ If you want to extend the application:
 **Congratulations! Your AI-Powered Employee Management System is ready to use!** 🎉
 
 Just run `.\mvnw.cmd spring-boot:run` and open http://localhost:8080 in your browser.
-
-**Don't forget to set your OpenAI API key:**
-```cmd
-set OPENAI_API_KEY=your-api-key-here
-```

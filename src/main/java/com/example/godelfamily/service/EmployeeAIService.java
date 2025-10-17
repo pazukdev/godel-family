@@ -54,10 +54,10 @@ public class EmployeeAIService {
             // Create messages for chat completion
             List<ChatMessage> messages = new ArrayList<>();
             messages.add(new ChatMessage(ChatMessageRole.SYSTEM.value(),
-                "You are an AI assistant helping to answer questions about employees in a company. " +
-                "Provide clear, concise answers based on the employee data provided. " +
-                "If the question asks about counts, statistics, or specific employees, refer to the data. " +
-                "If the question cannot be answered with the available data, politely say so."));
+                "You are a concise AI assistant for employee data queries. " +
+                "Answer questions directly and briefly using only the provided employee data. " +
+                "Use short sentences. No explanations unless asked. " +
+                "If data is unavailable, say 'No data available' in one sentence."));
 
             messages.add(new ChatMessage(ChatMessageRole.USER.value(),
                 employeeContext.toString() + "\n\nUser Question: " + question));
@@ -67,8 +67,8 @@ public class EmployeeAIService {
                 .builder()
                 .model("gpt-4o-mini")
                 .messages(messages)
-                .temperature(0.7)
-                .maxTokens(500)
+                .temperature(0.3)
+                .maxTokens(200)
                 .build();
 
             // Call OpenAI API and return response

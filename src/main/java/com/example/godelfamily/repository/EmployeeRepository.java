@@ -18,13 +18,13 @@ public class EmployeeRepository {
     @PostConstruct
     public void init() {
         // Initialize with 10 sample employees
-        save(new Employee(null, "Emil", "Developer", Title.SENIOR, "Java"));
-        save(new Employee(null, "Pavel", "Developer", Title.LEAD, "Java"));
+        save(new Employee(null, "Emil", "Developer", Title.LEAD, "Java"));
+        save(new Employee(null, "Pavel", "Developer", Title.SENIOR, "Java"));
         save(new Employee(null, "Sergey", "QA", Title.MIDDLE, "QA"));
         save(new Employee(null, "Anna", "Developer", Title.JUNIOR, "Python"));
         save(new Employee(null, "Maria", "BA", Title.MIDDLE, "BA"));
         save(new Employee(null, "Dmitry", "Developer", Title.SENIOR, "JS"));
-        save(new Employee(null, "Olga", "QA", Title.LEAD, "QA"));
+        save(new Employee(null, "Olga", "QA", Title.SENIOR, "QA"));
         save(new Employee(null, "Igor", "Developer", Title.MIDDLE, "Java"));
         save(new Employee(null, "Svetlana", "BA", Title.SENIOR, "BA"));
         save(new Employee(null, "Alexey", "Developer", Title.JUNIOR, "Python"));
@@ -54,4 +54,3 @@ public class EmployeeRepository {
         return employees.containsKey(id);
     }
 }
-

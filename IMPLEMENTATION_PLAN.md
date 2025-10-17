@@ -84,13 +84,13 @@ Add the following dependencies to enable Spring Web and validation:
 - Initialize with 10 sample employees in constructor or @PostConstruct method
 
 **Sample Employees:**
-1. Emil - Developer, SENIOR, Java
-2. Pavel - Developer, LEAD, Java
+1. Emil - Developer, LEAD, Java
+2. Pavel - Developer, SENIOR, Java
 3. Sergey - QA, MIDDLE, QA
 4. Anna - Developer, JUNIOR, Python
 5. Maria - BA, MIDDLE, BA
 6. Dmitry - Developer, SENIOR, JS
-7. Olga - QA, LEAD, QA
+7. Olga - QA, SENIOR, QA
 8. Igor - Developer, MIDDLE, Java
 9. Svetlana - BA, SENIOR, BA
 10. Alexey - Developer, JUNIOR, Python
@@ -403,4 +403,3 @@ After implementation, verify:
 ---
 
 **Start with this plan and implement step by step. Each component is independent and can be developed incrementally. Good luck! 🚀**
-
