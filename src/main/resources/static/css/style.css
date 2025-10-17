@@ -81,12 +81,12 @@ header h1 {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
     border: none;
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, #5568d3 0%, #65398e 100%);
+    background: linear-gradient(135deg, #218838 0%, #1ab386 100%);
 }
 
 .btn-warning {
