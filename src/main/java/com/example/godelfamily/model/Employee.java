@@ -1,24 +1,34 @@
 package com.example.godelfamily.model;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.Objects;
 
+@Entity
+@Table(name = "employees")
 public class Employee {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Name is required")
+    @Column(nullable = false)
     private String name;
 
     @NotBlank(message = "Position is required")
+    @Column(nullable = false)
     private String position;
 
     @NotNull(message = "Title is required")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Title title;
 
     @NotBlank(message = "Division is required")
+    @Column(nullable = false)
     private String division;
 
     public Employee() {

@@ -132,24 +132,26 @@ class EmployeeServiceTest {
 
     @Test
     void testDeleteEmployee_ExistingEmployee() {
-        when(employeeRepository.deleteById(1L)).thenReturn(true);
+        when(employeeRepository.existsById(1L)).thenReturn(true);
+        doNothing().when(employeeRepository).deleteById(1L);
 
         assertDoesNotThrow(() -> {
             employeeService.deleteEmployee(1L);
         });
 
+        verify(employeeRepository, times(1)).existsById(1L);
         verify(employeeRepository, times(1)).deleteById(1L);
     }
 
     @Test
     void testDeleteEmployee_NonExistingEmployee() {
-        when(employeeRepository.deleteById(999L)).thenReturn(false);
+        when(employeeRepository.existsById(999L)).thenReturn(false);
 
         assertThrows(EmployeeNotFoundException.class, () -> {
             employeeService.deleteEmployee(999L);
         });
 
-        verify(employeeRepository, times(1)).deleteById(999L);
+        verify(employeeRepository, times(1)).existsById(999L);
+        verify(employeeRepository, never()).deleteById(999L);
     }
 }
-

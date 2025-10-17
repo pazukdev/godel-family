@@ -2,42 +2,38 @@ package com.example.godelfamily.repository;
 
 import com.example.godelfamily.model.Employee;
 import com.example.godelfamily.model.Title;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DataJpaTest
 class EmployeeRepositoryTest {
 
+    @Autowired
     private EmployeeRepository repository;
-
-    @BeforeEach
-    void setUp() {
-        repository = new EmployeeRepository();
-        repository.init(); // Initialize with 10 sample employees
-    }
-
-    @Test
-    void testInit_LoadsSampleData() {
-        List<Employee> employees = repository.findAll();
-
-        assertEquals(10, employees.size());
-    }
 
     @Test
     void testFindAll_ReturnsAllEmployees() {
+        // Save some test data
+        repository.save(new Employee(null, "Emil", "Developer", Title.LEAD, "Java"));
+        repository.save(new Employee(null, "Pavel", "Developer", Title.SENIOR, "Java"));
+
         List<Employee> employees = repository.findAll();
 
         assertNotNull(employees);
-        assertEquals(10, employees.size());
+        assertEquals(2, employees.size());
     }
 
     @Test
     void testFindById_ExistingEmployee() {
-        Optional<Employee> employee = repository.findById(1L);
+        Employee saved = repository.save(new Employee(null, "Emil", "Developer", Title.LEAD, "Java"));
+
+        Optional<Employee> employee = repository.findById(saved.getId());
 
         assertTrue(employee.isPresent());
         assertEquals("Emil", employee.get().getName());
@@ -66,35 +62,36 @@ class EmployeeRepositoryTest {
 
     @Test
     void testSave_ExistingEmployee() {
-        Employee existing = repository.findById(1L).get();
+        Employee existing = repository.save(new Employee(null, "Original Name", "Developer", Title.JUNIOR, "Java"));
         existing.setName("Updated Name");
 
         Employee updated = repository.save(existing);
 
-        assertEquals(1L, updated.getId());
+        assertEquals(existing.getId(), updated.getId());
         assertEquals("Updated Name", updated.getName());
     }
 
     @Test
     void testDeleteById_ExistingEmployee() {
-        assertTrue(repository.existsById(1L));
+        Employee saved = repository.save(new Employee(null, "Test", "Developer", Title.JUNIOR, "Java"));
+        Long id = saved.getId();
+        assertTrue(repository.existsById(id));
 
-        boolean deleted = repository.deleteById(1L);
+        repository.deleteById(id);
 
-        assertTrue(deleted);
-        assertFalse(repository.existsById(1L));
+        assertFalse(repository.existsById(id));
     }
 
     @Test
     void testDeleteById_NonExistingEmployee() {
-        boolean deleted = repository.deleteById(999L);
-
-        assertFalse(deleted);
+        // JPA's deleteById doesn't throw exception if not found, it just does nothing
+        assertDoesNotThrow(() -> repository.deleteById(999L));
     }
 
     @Test
     void testExistsById_ExistingEmployee() {
-        assertTrue(repository.existsById(1L));
+        Employee saved = repository.save(new Employee(null, "Test", "Developer", Title.JUNIOR, "Java"));
+        assertTrue(repository.existsById(saved.getId()));
     }
 
     @Test
@@ -115,4 +112,3 @@ class EmployeeRepositoryTest {
         assertTrue(saved2.getId() > saved1.getId());
     }
 }
-
